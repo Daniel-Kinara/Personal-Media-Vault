@@ -13,7 +13,6 @@ import ProtectedRoute from './components/Common/ProtectedRoute'
 import Features from './pages/Features'
 import Pricing from './pages/Pricing'
 import MobileApps from './pages/MobileApps'
-import Api from './pages/Api'
 import About from './pages/About'
 import Careers from './pages/Careers'
 import Blog from './pages/Blog'
@@ -75,7 +74,6 @@ function App() {
           <Route path="/features" element={<Features />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/apps" element={<MobileApps />} />
-          <Route path="/api" element={<Api />} />
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
