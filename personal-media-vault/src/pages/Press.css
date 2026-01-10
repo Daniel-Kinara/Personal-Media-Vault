@@ -1,0 +1,372 @@
+.press-page {
+  padding: 40px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-header h1 {
+  color: white;
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.contact-card,
+.resources-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-card h2,
+.resources-card h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-item .label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+.contact-item a,
+.contact-item span {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.contact-item a:hover {
+  color: #667eea;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+}
+
+.resource-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.resource-item:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+.resource-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.resource-item h3 {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.resource-item p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  margin: 0;
+}
+
+.press-releases {
+  margin-bottom: 60px;
+}
+
+.press-releases h2,
+.media-coverage h2,
+.logos-section h2,
+.download-section h2 {
+  color: white;
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.releases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.release-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.release-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.release-card .date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.release-card h3 {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.release-card p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.read-more {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.read-more:hover {
+  color: #764ba2;
+  transform: translateX(5px);
+}
+
+.media-coverage {
+  margin-bottom: 60px;
+}
+
+.coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.article-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.article-card .outlet {
+  color: #667eea;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.article-card h3 {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.article-card .date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.read-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.read-link:hover {
+  color: #764ba2;
+  transform: translateX(5px);
+}
+
+.logos-section {
+  margin-bottom: 60px;
+}
+
+.logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+}
+
+.logo-item {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.logo-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.logo-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.logo-item span {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.download-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 50px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-section p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.download-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-icon {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 32px;
+  }
+  
+  .press-releases h2,
+  .media-coverage h2,
+  .logos-section h2,
+  .download-section h2 {
+    font-size: 28px;
+  }
+  
+  .releases-grid,
+  .coverage-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .logos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .download-buttons {
+    flex-direction: column;
+  }
+  
+  .download-btn {
+    justify-content: center;
+  }
+  
+  .download-section {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,147 @@
+.privacy-page {
+  padding: 40px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-header h1 {
+  color: white;
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+
+.privacy-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 992px) {
+  .privacy-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toc {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toc h3 {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc li {
+  margin-bottom: 10px;
+}
+
+.toc a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.toc a:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.policy-content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-content section {
+  margin-bottom: 40px;
+}
+
+.policy-content h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-content p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.policy-content ul {
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.policy-content li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.policy-content strong {
+  color: white;
+  font-weight: 600;
+}
+
+.contact-info {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.contact-info p {
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 32px;
+  }
+  
+  .toc {
+    position: static;
+  }
+  
+  .policy-content {
+    padding: 25px 20px;
+  }
+  
+  .policy-content h2 {
+    font-size: 20px;
+  }
+}
