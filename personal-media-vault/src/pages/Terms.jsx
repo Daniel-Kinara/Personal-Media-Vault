@@ -5,7 +5,7 @@ const Terms = () => {
     <div className="terms-page">
       <div className="page-header">
         <h1>Terms of Service</h1>
-        <p>Last updated: March 15, 2024</p>
+        <p>Last updated: January 15, 2026</p>
       </div>
 
       <div className="terms-content">

@@ -5,7 +5,7 @@ const Privacy = () => {
     <div className="privacy-page">
       <div className="page-header">
         <h1>Privacy Policy</h1>
-        <p>Last updated: March 15, 2024</p>
+        <p>Last updated: January 10, 2026</p>
       </div>
 
       <div className="privacy-content">

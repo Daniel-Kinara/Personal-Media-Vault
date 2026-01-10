@@ -28,7 +28,7 @@ const Contact = () => {
             <div className="info-icon">📞</div>
             <h3>Phone</h3>
             <p>Mon-Fri, 9AM-6PM EST</p>
-            <a href="tel:+15551234567">+1 (555) 123-4567</a>
+            <a href="tel:+254727750894">+254 727 750 894</a>
           </div>
 
           <div className="info-card">
@@ -36,9 +36,9 @@ const Contact = () => {
             <h3>Office</h3>
             <p>Visit Us</p>
             <address>
-              123 Tech Street<br />
-              San Francisco, CA 94107<br />
-              United States
+              Tom Mboya Street<br />
+              Nairobi City<br />
+              Kenya
             </address>
           </div>
         </div>
@@ -137,7 +137,7 @@ const Contact = () => {
           <div className="map-content">
             <div className="map-icon">🗺️</div>
             <h3>Our Location</h3>
-            <p>123 Tech Street, San Francisco, CA 94107</p>
+            <p>Tom Mboya Street,Nairobi, Kenya</p>
             <a 
               href="https://maps.google.com/?q=123+Tech+Street+San+Francisco+CA+94107" 
               target="_blank" 

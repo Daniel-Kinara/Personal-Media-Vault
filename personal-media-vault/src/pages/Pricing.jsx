@@ -4,7 +4,7 @@ const Pricing = () => {
   const plans = [
     {
       name: 'Free',
-      price: '$0',
+      price: 'Ksh0',
       period: 'forever',
       features: [
         '5 GB Storage',
@@ -18,7 +18,7 @@ const Pricing = () => {
     },
     {
       name: 'Pro',
-      price: '$9.99',
+      price: 'Ksh1499',
       period: 'per month',
       features: [
         '100 GB Storage',
@@ -33,7 +33,7 @@ const Pricing = () => {
     },
     {
       name: 'Business',
-      price: '$29.99',
+      price: 'Ksh2999',
       period: 'per month',
       features: [
         '1 TB Storage',

@@ -4,19 +4,19 @@ const Press = () => {
   const pressReleases = [
     {
       title: 'Media Vault Raises $10M Series A Funding',
-      date: 'March 15, 2024',
+      date: 'January 15, 2026',
       summary: 'Funding will accelerate product development and expand team.',
       link: '#'
     },
     {
       title: 'Launch of AI-Powered Photo Organization',
-      date: 'February 28, 2024',
+      date: 'December 28, 2025',
       summary: 'New AI features revolutionize media management.',
       link: '#'
     },
     {
       title: 'Partnership with Major Cloud Provider',
-      date: 'January 20, 2024',
+      date: 'January 10, 2026',
       summary: 'Strategic partnership to enhance storage infrastructure.',
       link: '#'
     }
@@ -26,25 +26,25 @@ const Press = () => {
     {
       outlet: 'TechCrunch',
       title: 'Media Vault Secures Major Funding Round',
-      date: 'March 16, 2024',
+      date: 'January 6, 2026',
       link: '#'
     },
     {
       outlet: 'Wired',
       title: 'How AI is Changing Photo Storage',
-      date: 'March 1, 2024',
+      date: 'January 1, 2026',
       link: '#'
     },
     {
       outlet: 'Forbes',
       title: 'Top 10 Cloud Storage Startups to Watch',
-      date: 'February 15, 2024',
+      date: 'December 31, 2025',
       link: '#'
     },
     {
       outlet: 'The Verge',
       title: 'Media Vault Review: Secure Storage Done Right',
-      date: 'January 30, 2024',
+      date: 'December 30, 2025',
       link: '#'
     }
   ]
@@ -75,11 +75,11 @@ const Press = () => {
             </div>
             <div className="contact-item">
               <span className="label">Phone:</span>
-              <a href="tel:+15551234567">+1 (555) 123-4567</a>
+              <a href="tel:+254727750894">+254 727 750 894</a>
             </div>
             <div className="contact-item">
               <span className="label">Address:</span>
-              <span>123 Tech Street, San Francisco, CA 94107</span>
+              <span>Tom Mboya Street, Nairobi City, Kenya</span>
             </div>
           </div>
         </div>

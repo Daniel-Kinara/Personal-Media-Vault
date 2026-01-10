@@ -12,7 +12,7 @@ const Careers = () => {
     {
       title: 'Backend Engineer',
       department: 'Engineering',
-      location: 'San Francisco',
+      location: 'Remote',
       type: 'Full-time',
       description: 'Design scalable APIs and microservices'
     },
@@ -40,7 +40,7 @@ const Careers = () => {
     {
       title: 'Security Analyst',
       department: 'Security',
-      location: 'New York',
+      location: 'Remote',
       type: 'Full-time',
       description: 'Protect our systems and user data'
     }
@@ -51,7 +51,7 @@ const Careers = () => {
     { icon: '🏖️', title: 'Unlimited PTO', description: 'Take time when you need it' },
     { icon: '🏥', title: 'Health Insurance', description: 'Comprehensive coverage' },
     { icon: '🏡', title: 'Remote First', description: 'Work from anywhere' },
-    { icon: '🎓', title: 'Learning Budget', description: '$2,000/year for growth' },
+    { icon: '🎓', title: 'Learning Budget', description: 'Ksh40,000/year for growth' },
     { icon: '🍕', title: 'Team Events', description: 'Regular team gatherings' }
   ]
 
