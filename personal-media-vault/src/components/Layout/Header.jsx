@@ -1,114 +1,89 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import Sidebar from './Sidebar'
 import './Header.css'
 
 const Header = ({ isAuthenticated, onLogout }) => {
   const navigate = useNavigate()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile)
-    }
-  }, [])
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const handleLogout = () => {
     onLogout()
     navigate('/')
-    setIsMobileMenuOpen(false)
   }
 
-  const toggleMobileMenu = () => {
-    const newState = !isMobileMenuOpen
-    setIsMobileMenuOpen(newState)
-    
-    // Toggle body scroll lock
-    if (newState) {
-      document.body.classList.add('menu-open')
-    } else {
-      document.body.classList.remove('menu-open')
-    }
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
   }
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false)
-    document.body.classList.remove('menu-open')
-  }
-
-  const handleNavClick = (e) => {
-    if (isMobile) {
-      closeMobileMenu()
-    }
+  const closeSidebar = () => {
+    setIsSidebarOpen(false)
   }
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <div className="logo">
-          <Link to="/" onClick={closeMobileMenu}>
-            <span className="logo-icon">📦</span>
-            <span className="logo-text">Media Vault</span>
-          </Link>
+    <>
+      <header className="header">
+        <div className="header-container">
+          <div className="logo">
+            <Link to="/">
+              <span className="logo-icon">📦</span>
+              <span className="logo-text">Media Vault</span>
+            </Link>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="nav-menu">
+            {isAuthenticated ? (
+              <>
+                <Link to="/dashboard" className="nav-link">
+                  <span className="nav-icon">📊</span>
+                  Dashboard
+                </Link>
+                <Link to="/profile" className="nav-link">
+                  <span className="nav-icon">👤</span>
+                  Profile
+                </Link>
+                <button onClick={handleLogout} className="logout-btn">
+                  <span className="logout-icon">🚪</span>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="nav-link">
+                  <span className="nav-icon">🔑</span>
+                  Login
+                </Link>
+                <Link to="/register" className="nav-link register-btn">
+                  <span className="nav-icon">📝</span>
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </nav>
+          
+          {/* Mobile Hamburger Menu Button */}
+          <button 
+            className={`mobile-menu-btn ${isSidebarOpen ? 'active' : ''}`}
+            onClick={toggleSidebar}
+            aria-label="Toggle menu"
+            aria-expanded={isSidebarOpen}
+          >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </button>
         </div>
-        
-        <button 
-          className={`mobile-menu-btn ${isMobileMenuOpen ? 'active' : ''}`}
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-        
-        <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-          {isAuthenticated ? (
-            <>
-              <Link to="/dashboard" className="nav-link" onClick={handleNavClick}>
-                <span className="nav-icon">📊</span>
-                Dashboard
-              </Link>
-              <Link to="/profile" className="nav-link" onClick={handleNavClick}>
-                <span className="nav-icon">👤</span>
-                Profile
-              </Link>
-              <button onClick={handleLogout} className="logout-btn">
-                <span className="logout-icon">🚪</span>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="nav-link" onClick={handleNavClick}>
-                <span className="nav-icon">🔑</span>
-                Login
-              </Link>
-              <Link to="/register" className="nav-link register-btn" onClick={handleNavClick}>
-                <span className="nav-icon">📝</span>
-                Sign Up
-              </Link>
-            </>
-          )}
-        </nav>
-        
-        {/* Mobile menu backdrop */}
-        {isMobileMenuOpen && (
-          <div 
-            className="mobile-menu-backdrop"
-            onClick={closeMobileMenu}
-          />
-        )}
-      </div>
-    </header>
+      </header>
+
+      {/* Sidebar Component */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={closeSidebar}
+        isAuthenticated={isAuthenticated}
+        onLogout={handleLogout}
+      />
+    </>
   )
 }
 
