@@ -13,9 +13,36 @@
   width: 100%;
 }
 
-/* Responsive Design */
+/* Mobile optimization */
 @media (max-width: 768px) {
   .main-content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
     padding: 10px;
+  }
+}
+
+/* Smooth transitions for mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  touch-action: manipulation;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+  button, .btn, .nav-link, input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 }

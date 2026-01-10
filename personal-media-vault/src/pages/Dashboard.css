@@ -1,5 +1,17 @@
 .dashboard {
   padding: 20px 0;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dashboard-header {
@@ -34,11 +46,15 @@
   align-items: center;
   gap: 20px;
   transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .stat-icon {
@@ -50,27 +66,56 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .stat-content h3 {
   color: white;
   font-size: 28px;
   margin-bottom: 5px;
+  font-weight: 700;
 }
 
 .stat-content p {
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Mobile Responsive Dashboard */
+@media (max-width: 1024px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+}
+
+@media (max-width: 768px) {
   .dashboard-header h1 {
     font-size: 28px;
+  }
+  
+  .dashboard-header p {
+    font-size: 16px;
+  }
+  
+  .stats-grid {
+    gap: 15px;
+  }
+  
+  .stat-card {
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 32px;
+  }
+  
+  .stat-content h3 {
+    font-size: 24px;
   }
 }
 
@@ -79,7 +124,48 @@
     grid-template-columns: 1fr;
   }
   
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+  
+  .stat-card {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .stat-content h3 {
+    font-size: 22px;
+  }
+  
+  .stat-content p {
+    font-size: 12px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .stat-card {
     padding: 20px;
+  }
+}
+
+/* Large Mobile */
+@media (max-width: 425px) {
+  .dashboard {
+    padding: 10px 0;
+  }
+  
+  .stat-card {
+    padding: 15px;
+  }
+  
+  .stat-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 28px;
   }
 }

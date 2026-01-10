@@ -13,9 +13,11 @@ const Home = () => {
           </p>
           <div className="hero-cta">
             <Link to="/register" className="cta-btn primary">
+              <span className="btn-icon">🚀</span>
               Get Started Free
             </Link>
             <Link to="/login" className="cta-btn secondary">
+              <span className="btn-icon">🔑</span>
               Sign In
             </Link>
           </div>
@@ -83,6 +85,7 @@ const Home = () => {
         <h2>Start Protecting Your Memories Today</h2>
         <p>Join thousands of users who trust Media Vault with their precious memories.</p>
         <Link to="/register" className="cta-btn primary large">
+          <span className="btn-icon">📦</span>
           Create Free Account
         </Link>
       </div>

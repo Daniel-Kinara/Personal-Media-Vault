@@ -20,6 +20,38 @@ function App() {
     }
   }, [])
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    const closeMobileMenu = () => {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn')
+      const navMenu = document.querySelector('.nav-menu')
+      
+      if (mobileMenuBtn?.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active')
+      }
+      if (navMenu?.classList.contains('active')) {
+        navMenu.classList.remove('active')
+      }
+      document.body.classList.remove('menu-open')
+    }
+    
+    // Listen for route changes
+    const handleRouteChange = () => {
+      closeMobileMenu()
+    }
+    
+    // Add event listener for clicks (alternative to detecting route changes)
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('/')) {
+        setTimeout(closeMobileMenu, 100)
+      }
+    })
+    
+    return () => {
+      document.removeEventListener('click', handleRouteChange)
+    }
+  }, [])
+
   const handleLogin = () => {
     setIsAuthenticated(true)
   }

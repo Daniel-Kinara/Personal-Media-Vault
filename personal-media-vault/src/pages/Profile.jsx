@@ -10,8 +10,16 @@ const Profile = () => {
     phone: '',
     bio: ''
   })
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
     const storedUser = JSON.parse(localStorage.getItem('user'))
     if (storedUser) {
       setUser(storedUser)
@@ -21,6 +29,10 @@ const Profile = () => {
         phone: storedUser.phone || '',
         bio: storedUser.bio || ''
       })
+    }
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile)
     }
   }, [])
 
@@ -53,7 +65,7 @@ const Profile = () => {
     const media = JSON.parse(localStorage.getItem('media') || '[]')
     const totalSize = media.reduce((sum, item) => sum + (item.size || 0), 0)
     const usedGB = (totalSize / (1024 * 1024 * 1024)).toFixed(2)
-    const percentage = Math.min((usedGB / 5) * 100, 100) // Assuming 5GB free tier
+    const percentage = Math.min((usedGB / 5) * 100, 100)
     
     return {
       used: usedGB,
@@ -65,7 +77,12 @@ const Profile = () => {
   const storageUsage = getStorageUsage()
 
   if (!user) {
-    return <div className="profile-loading">Loading...</div>
+    return (
+      <div className="profile-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading profile...</p>
+      </div>
+    )
   }
 
   return (
@@ -83,10 +100,18 @@ const Profile = () => {
             </div>
             <h3>{user.name || 'User'}</h3>
             <p className="user-email">{user.email}</p>
+            <p className="user-joined">
+              Joined {new Date(user.createdAt || Date.now()).toLocaleDateString()}
+            </p>
           </div>
 
           <div className="storage-info">
-            <h4>Storage Usage</h4>
+            <div className="storage-header">
+              <h4>Storage Usage</h4>
+              <span className="storage-percentage">
+                {storageUsage.percentage.toFixed(1)}%
+              </span>
+            </div>
             <div className="storage-bar">
               <div 
                 className="storage-used" 
@@ -106,14 +131,12 @@ const Profile = () => {
               </span>
             </div>
             <div className="stat-item">
-              <span className="stat-label">Joined</span>
-              <span className="stat-value">
-                {new Date().toLocaleDateString()}
-              </span>
+              <span className="stat-label">Account Type</span>
+              <span className="stat-value free">Free</span>
             </div>
             <div className="stat-item">
-              <span className="stat-label">Plan</span>
-              <span className="stat-value free">Free</span>
+              <span className="stat-label">Status</span>
+              <span className="stat-value active">Active</span>
             </div>
           </div>
         </div>
@@ -127,6 +150,7 @@ const Profile = () => {
                   className="edit-btn"
                   onClick={() => setEditing(true)}
                 >
+                  <span className="btn-icon">✏️</span>
                   Edit Profile
                 </button>
               ) : (
@@ -135,12 +159,14 @@ const Profile = () => {
                     className="save-btn"
                     onClick={handleSave}
                   >
-                    Save Changes
+                    <span className="btn-icon">💾</span>
+                    Save
                   </button>
                   <button 
                     className="cancel-btn"
                     onClick={handleCancel}
                   >
+                    <span className="btn-icon">✖️</span>
                     Cancel
                   </button>
                 </div>
@@ -150,7 +176,10 @@ const Profile = () => {
             <div className="profile-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label>Full Name</label>
+                  <label>
+                    <span className="label-icon">👤</span>
+                    Full Name
+                  </label>
                   {editing ? (
                     <input
                       type="text"
@@ -164,7 +193,10 @@ const Profile = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label>Email Address</label>
+                  <label>
+                    <span className="label-icon">📧</span>
+                    Email Address
+                  </label>
                   {editing ? (
                     <input
                       type="email"
@@ -181,7 +213,10 @@ const Profile = () => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Phone Number</label>
+                  <label>
+                    <span className="label-icon">📱</span>
+                    Phone Number
+                  </label>
                   {editing ? (
                     <input
                       type="tel"
@@ -195,13 +230,19 @@ const Profile = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label>Account Type</label>
+                  <label>
+                    <span className="label-icon">🏷️</span>
+                    Account Type
+                  </label>
                   <p className="form-value">Free Account</p>
                 </div>
               </div>
 
               <div className="form-group">
-                <label>Bio</label>
+                <label>
+                  <span className="label-icon">📝</span>
+                  Bio
+                </label>
                 {editing ? (
                   <textarea
                     name="bio"
@@ -218,32 +259,48 @@ const Profile = () => {
           </div>
 
           <div className="profile-card">
-            <h2>Account Security</h2>
+            <h2>
+              <span className="section-icon">🔒</span>
+              Account Security
+            </h2>
             <div className="security-options">
               <div className="security-item">
-                <h4>Change Password</h4>
-                <p>Update your password regularly to keep your account secure</p>
-                <button className="security-btn">Change Password</button>
+                <div className="security-icon">🔑</div>
+                <div className="security-content">
+                  <h4>Change Password</h4>
+                  <p>Update your password regularly to keep your account secure</p>
+                </div>
+                <button className="security-btn">Change</button>
               </div>
               <div className="security-item">
-                <h4>Two-Factor Authentication</h4>
-                <p>Add an extra layer of security to your account</p>
+                <div className="security-icon">🔐</div>
+                <div className="security-content">
+                  <h4>Two-Factor Authentication</h4>
+                  <p>Add an extra layer of security to your account</p>
+                </div>
                 <button className="security-btn disabled" disabled>
                   Coming Soon
                 </button>
               </div>
               <div className="security-item">
-                <h4>Login Activity</h4>
-                <p>View your recent login history</p>
-                <button className="security-btn">View Activity</button>
+                <div className="security-icon">📋</div>
+                <div className="security-content">
+                  <h4>Login Activity</h4>
+                  <p>View your recent login history</p>
+                </div>
+                <button className="security-btn">View</button>
               </div>
             </div>
           </div>
 
           <div className="danger-zone">
-            <h3>Danger Zone</h3>
-            <p>Permanently delete your account and all stored media</p>
+            <div className="danger-header">
+              <span className="danger-icon">⚠️</span>
+              <h3>Danger Zone</h3>
+            </div>
+            <p>Permanently delete your account and all stored media. This action cannot be undone.</p>
             <button className="delete-btn">
+              <span className="delete-icon">🗑️</span>
               Delete Account
             </button>
           </div>
