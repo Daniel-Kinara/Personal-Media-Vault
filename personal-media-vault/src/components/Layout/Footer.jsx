@@ -37,8 +37,7 @@ const Footer = () => {
       links: [
         { to: "/features", label: "Features" },
         { to: "/pricing", label: "Pricing" },
-        { to: "/apps", label: "Mobile Apps" },
-        { to: "/api", label: "API" }
+        { to: "/apps", label: "Mobile Apps"}
       ]
     },
     {
