@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react' // ✅ Added useRef
 import './Sidebar.css'
 
 const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
   const navigate = useNavigate()
+  const sidebarRef = useRef(null) // ✅ Added ref for click outside detection
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -12,7 +13,15 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
       }
     }
 
+    const handleClickOutside = (e) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target) && isOpen) {
+        onClose()
+      }
+    }
+
     document.addEventListener('keydown', handleEscape)
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
     
     if (isOpen) {
       document.body.classList.add('sidebar-open')
@@ -22,27 +31,56 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
       document.body.classList.remove('sidebar-open')
     }
   }, [isOpen, onClose])
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e) => {
+    e.preventDefault()
+    const href = e.currentTarget.getAttribute('href')
+    if (href) {
+      onClose()
+      setTimeout(() => {
+        navigate(href)
+      }, 300)
+    }
+  }
+
+  const handleButtonClick = (e) => {
+    e.preventDefault()
     onClose()
   }
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault()
     onLogout()
     onClose()
-    navigate('/')
+    setTimeout(() => {
+      navigate('/')
+    }, 300)
   }
 
   if (!isOpen) return null
 
   return (
     <>
-      <div className="sidebar-overlay" onClick={onClose} />
+      <div 
+        className="sidebar-overlay" 
+        onClick={onClose}
+        role="button"
+        aria-label="Close sidebar"
+        tabIndex={0}
+      />
       
-      <aside className="sidebar">
+      <aside 
+        className="sidebar" 
+        ref={sidebarRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
         <div className="sidebar-header">
           <div className="sidebar-logo">
             <span className="logo-icon">📦</span>
@@ -72,40 +110,60 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
             <h4 className="section-title">Main</h4>
             <ul>
               <li>
-                <Link to="/" className="nav-link" onClick={handleLinkClick}>
+                <a 
+                  href="/" 
+                  className="nav-link" 
+                  onClick={handleLinkClick}
+                >
                   <span className="nav-icon">🏠</span>
                   <span className="nav-text">Home</span>
-                </Link>
+                </a>
               </li>
               
               {isAuthenticated ? (
                 <>
                   <li>
-                    <Link to="/dashboard" className="nav-link" onClick={handleLinkClick}>
+                    <a 
+                      href="/dashboard" 
+                      className="nav-link" 
+                      onClick={handleLinkClick}
+                    >
                       <span className="nav-icon">📊</span>
                       <span className="nav-text">Dashboard</span>
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/profile" className="nav-link" onClick={handleLinkClick}>
+                    <a 
+                      href="/profile" 
+                      className="nav-link" 
+                      onClick={handleLinkClick}
+                    >
                       <span className="nav-icon">👤</span>
                       <span className="nav-text">Profile</span>
-                    </Link>
+                    </a>
                   </li>
                 </>
               ) : (
                 <>
                   <li>
-                    <Link to="/login" className="nav-link" onClick={handleLinkClick}>
+                    <a 
+                      href="/login" 
+                      className="nav-link" 
+                      onClick={handleLinkClick}
+                    >
                       <span className="nav-icon">🔑</span>
                       <span className="nav-text">Login</span>
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/register" className="nav-link" onClick={handleLinkClick}>
+                    <a 
+                      href="/register" 
+                      className="nav-link" 
+                      onClick={handleLinkClick}
+                    >
                       <span className="nav-icon">📝</span>
                       <span className="nav-text">Register</span>
-                    </Link>
+                    </a>
                   </li>
                 </>
               )}
@@ -117,22 +175,32 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
               <h4 className="section-title">Media</h4>
               <ul>
                 <li>
-                  <Link to="/dashboard?view=images" className="nav-link" onClick={handleLinkClick}>
+                  <button 
+                    className="nav-link" 
+                    onClick={handleButtonClick}
+                  >
                     <span className="nav-icon">🖼️</span>
                     <span className="nav-text">My Images</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="/dashboard?view=videos" className="nav-link" onClick={handleLinkClick}>
+                  <button 
+                    className="nav-link" 
+                    onClick={handleButtonClick}
+                  >
                     <span className="nav-icon">🎥</span>
                     <span className="nav-text">My Videos</span>
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="/dashboard?view=upload" className="nav-link" onClick={handleLinkClick}>
+                  <a 
+                    href="/dashboard" 
+                    className="nav-link" 
+                    onClick={handleLinkClick}
+                  >
                     <span className="nav-icon">⬆️</span>
                     <span className="nav-text">Upload New</span>
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -144,24 +212,34 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
               {isAuthenticated ? (
                 <>
                   <li>
-                    <button className="nav-link logout-btn" onClick={handleLogout}>
+                    <button 
+                      className="nav-link logout-btn" 
+                      onClick={handleLogout}
+                    >
                       <span className="nav-icon">🚪</span>
                       <span className="nav-text">Logout</span>
                     </button>
                   </li>
                   <li>
-                    <Link to="/settings" className="nav-link" onClick={handleLinkClick}>
+                    <button 
+                      className="nav-link" 
+                      onClick={handleButtonClick}
+                    >
                       <span className="nav-icon">⚙️</span>
                       <span className="nav-text">Settings</span>
-                    </Link>
+                    </button>
                   </li>
                 </>
               ) : (
                 <li>
-                  <Link to="/login" className="nav-link" onClick={handleLinkClick}>
+                  <a 
+                    href="/login" 
+                    className="nav-link" 
+                    onClick={handleLinkClick}
+                  >
                     <span className="nav-icon">🔐</span>
                     <span className="nav-text">Secure Login</span>
-                  </Link>
+                  </a>
                 </li>
               )}
             </ul>

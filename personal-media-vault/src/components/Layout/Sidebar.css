@@ -9,6 +9,7 @@
   backdrop-filter: blur(4px);
   z-index: 9998;
   animation: fadeIn 0.3s ease;
+  cursor: pointer;
 }
 
 @keyframes fadeIn {
@@ -32,10 +33,18 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  will-change: transform;
 }
 
 .sidebar-open .sidebar {
-  transform: translateX(0);
+  transform: translateX(0) !important;
+}
+
+/* Remove app transform on mobile */
+@media (max-width: 768px) {
+  body.sidebar-open .app {
+    transform: none;
+  }
 }
 
 /* Sidebar Header */
@@ -46,6 +55,9 @@
   padding: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .sidebar-logo {
@@ -80,6 +92,7 @@
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .sidebar-close-btn:hover {
@@ -169,6 +182,7 @@
   width: 100%;
   text-align: left;
   font-size: 16px;
+  font-family: inherit;
 }
 
 .nav-link:hover {
@@ -208,6 +222,8 @@
   padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(0, 0, 0, 0.2);
+  position: sticky;
+  bottom: 0;
 }
 
 .storage-info {
@@ -285,6 +301,8 @@
 /* Body Scroll Lock */
 body.sidebar-open {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 /* Mobile Responsive */
@@ -318,6 +336,7 @@ body.sidebar-open {
   .nav-link {
     padding: 12px 15px;
     font-size: 15px;
+    min-height: 50px;
   }
   
   .nav-icon {
@@ -328,6 +347,7 @@ body.sidebar-open {
 @media (max-width: 480px) {
   .sidebar {
     width: 100%;
+    max-width: 100%;
   }
   
   .sidebar-overlay {
@@ -364,14 +384,14 @@ body.sidebar-open {
   }
 }
 
-.sidebar-nav li {
+.sidebar-open .sidebar-nav li {
   animation: slideIn 0.3s ease forwards;
 }
 
-.sidebar-nav li:nth-child(1) { animation-delay: 0.1s; }
-.sidebar-nav li:nth-child(2) { animation-delay: 0.15s; }
-.sidebar-nav li:nth-child(3) { animation-delay: 0.2s; }
-.sidebar-nav li:nth-child(4) { animation-delay: 0.25s; }
-.sidebar-nav li:nth-child(5) { animation-delay: 0.3s; }
-.sidebar-nav li:nth-child(6) { animation-delay: 0.35s; }
-.sidebar-nav li:nth-child(7) { animation-delay: 0.4s; }
+.sidebar-open .sidebar-nav li:nth-child(1) { animation-delay: 0.1s; }
+.sidebar-open .sidebar-nav li:nth-child(2) { animation-delay: 0.15s; }
+.sidebar-open .sidebar-nav li:nth-child(3) { animation-delay: 0.2s; }
+.sidebar-open .sidebar-nav li:nth-child(4) { animation-delay: 0.25s; }
+.sidebar-open .sidebar-nav li:nth-child(5) { animation-delay: 0.3s; }
+.sidebar-open .sidebar-nav li:nth-child(6) { animation-delay: 0.35s; }
+.sidebar-open .sidebar-nav li:nth-child(7) { animation-delay: 0.4s; }
