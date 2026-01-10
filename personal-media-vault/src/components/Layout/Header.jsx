@@ -1,18 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Sidebar from './Sidebar'
 import './Header.css'
 
 const Header = ({ isAuthenticated, onLogout }) => {
   const navigate = useNavigate()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
-  // Close sidebar on route change
-  useEffect(() => {
-    if (isSidebarOpen) {
-      setIsSidebarOpen(false)
-    }
-  }, [navigate])
 
   const handleLogout = () => {
     onLogout()
@@ -75,7 +68,6 @@ const Header = ({ isAuthenticated, onLogout }) => {
             onClick={toggleSidebar}
             aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
             aria-expanded={isSidebarOpen}
-            aria-controls="sidebar-navigation"
           >
             <span className="hamburger-line"></span>
             <span className="hamburger-line"></span>
@@ -89,7 +81,7 @@ const Header = ({ isAuthenticated, onLogout }) => {
         isOpen={isSidebarOpen}
         onClose={closeSidebar}
         isAuthenticated={isAuthenticated}
-        onLogout={onLogout}
+        onLogout={handleLogout}
       />
     </>
   )

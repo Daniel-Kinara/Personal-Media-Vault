@@ -5,77 +5,14 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* REMOVED sidebar transform effects */
 .main-content {
   flex: 1;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-}
-
-/* Mobile optimization */
-@media (max-width: 768px) {
-  .main-content {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-content {
-    padding: 10px;
-  }
-}
-
-/* Smooth transitions for mobile */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button, a {
-  touch-action: manipulation;
-}
-
-/* Improve touch targets on mobile */
-@media (max-width: 768px) {
-  button, .btn, .nav-link, input[type="submit"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  input, textarea, select {
-    font-size: 16px; /* Prevents zoom on iOS */
-  }
-}
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: transform 0.3s ease;
-}
-
-/* Sidebar open effect for app content */
-body.sidebar-open .app {
-  transform: translateX(280px);
-}
-
-@media (max-width: 480px) {
-  body.sidebar-open .app {
-    transform: translateX(0);
-  }
-}
-
-.main-content {
-  flex: 1;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  transition: filter 0.3s ease;
-}
-
-body.sidebar-open .main-content {
-  filter: blur(2px);
+  transition: opacity 0.3s ease;
 }
 
 /* Mobile optimization */
@@ -100,5 +37,12 @@ body.sidebar-open .main-content {
   
   input, textarea, select {
     font-size: 16px;
+  }
+}
+
+/* Prevent content shift when sidebar opens */
+@media (min-width: 769px) {
+  body.sidebar-open {
+    overflow: auto !important;
   }
 }

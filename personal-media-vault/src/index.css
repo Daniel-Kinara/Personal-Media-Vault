@@ -54,3 +54,15 @@ button, a {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
+/* Remove any sidebar-related body classes */
+body.sidebar-open {
+  overflow: hidden;
+}
+
+/* On desktop, allow scrolling even with sidebar open */
+@media (min-width: 769px) {
+  body.sidebar-open {
+    overflow: auto !important;
+  }
+}

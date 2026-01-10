@@ -1,10 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect, useRef } from 'react' // ✅ Added useRef
+import { useEffect, useRef } from 'react'
 import './Sidebar.css'
 
 const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
   const navigate = useNavigate()
-  const sidebarRef = useRef(null) // ✅ Added ref for click outside detection
+  const sidebarRef = useRef(null)
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -14,15 +14,18 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
     }
 
     const handleClickOutside = (e) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(e.target) && isOpen) {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
         onClose()
       }
     }
 
     document.addEventListener('keydown', handleEscape)
-    document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('touchstart', handleClickOutside)
     
+    // Only add overlay click listener on mobile
+    if (window.innerWidth <= 768) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
     if (isOpen) {
       document.body.classList.add('sidebar-open')
     } else {
@@ -32,35 +35,39 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
     return () => {
       document.removeEventListener('keydown', handleEscape)
       document.removeEventListener('mousedown', handleClickOutside)
-      document.removeEventListener('touchstart', handleClickOutside)
       document.body.classList.remove('sidebar-open')
     }
   }, [isOpen, onClose])
 
-  const handleLinkClick = (e) => {
-    e.preventDefault()
-    const href = e.currentTarget.getAttribute('href')
-    if (href) {
-      onClose()
-      setTimeout(() => {
-        navigate(href)
-      }, 300)
-    }
-  }
-
-  const handleButtonClick = (e) => {
-    e.preventDefault()
+  const handleLinkClick = (href) => {
     onClose()
+    setTimeout(() => {
+      navigate(href)
+    }, 300)
   }
 
-  const handleLogout = (e) => {
-    e.preventDefault()
+  const handleLogout = () => {
     onLogout()
     onClose()
     setTimeout(() => {
       navigate('/')
     }, 300)
   }
+
+  const getStorageUsage = () => {
+    const media = JSON.parse(localStorage.getItem('media') || '[]')
+    const totalSize = media.reduce((sum, item) => sum + (item.size || 0), 0)
+    const usedMB = (totalSize / (1024 * 1024)).toFixed(2)
+    const percentage = Math.min((usedMB / 5120) * 100, 100) // 5GB = 5120MB
+    
+    return {
+      used: usedMB,
+      total: 5120,
+      percentage: percentage
+    }
+  }
+
+  const storageUsage = getStorageUsage()
 
   if (!isOpen) return null
 
@@ -75,7 +82,7 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
       />
       
       <aside 
-        className="sidebar" 
+        className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}
         ref={sidebarRef}
         role="dialog"
         aria-modal="true"
@@ -110,60 +117,55 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
             <h4 className="section-title">Main</h4>
             <ul>
               <li>
-                <a 
-                  href="/" 
+                <button 
                   className="nav-link" 
-                  onClick={handleLinkClick}
+                  onClick={() => handleLinkClick('/')}
                 >
                   <span className="nav-icon">🏠</span>
                   <span className="nav-text">Home</span>
-                </a>
+                </button>
               </li>
               
               {isAuthenticated ? (
                 <>
                   <li>
-                    <a 
-                      href="/dashboard" 
+                    <button 
                       className="nav-link" 
-                      onClick={handleLinkClick}
+                      onClick={() => handleLinkClick('/dashboard')}
                     >
                       <span className="nav-icon">📊</span>
                       <span className="nav-text">Dashboard</span>
-                    </a>
+                    </button>
                   </li>
                   <li>
-                    <a 
-                      href="/profile" 
+                    <button 
                       className="nav-link" 
-                      onClick={handleLinkClick}
+                      onClick={() => handleLinkClick('/profile')}
                     >
                       <span className="nav-icon">👤</span>
                       <span className="nav-text">Profile</span>
-                    </a>
+                    </button>
                   </li>
                 </>
               ) : (
                 <>
                   <li>
-                    <a 
-                      href="/login" 
+                    <button 
                       className="nav-link" 
-                      onClick={handleLinkClick}
+                      onClick={() => handleLinkClick('/login')}
                     >
                       <span className="nav-icon">🔑</span>
                       <span className="nav-text">Login</span>
-                    </a>
+                    </button>
                   </li>
                   <li>
-                    <a 
-                      href="/register" 
+                    <button 
                       className="nav-link" 
-                      onClick={handleLinkClick}
+                      onClick={() => handleLinkClick('/register')}
                     >
                       <span className="nav-icon">📝</span>
                       <span className="nav-text">Register</span>
-                    </a>
+                    </button>
                   </li>
                 </>
               )}
@@ -177,7 +179,7 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
                 <li>
                   <button 
                     className="nav-link" 
-                    onClick={handleButtonClick}
+                    onClick={() => handleLinkClick('/dashboard?view=images')}
                   >
                     <span className="nav-icon">🖼️</span>
                     <span className="nav-text">My Images</span>
@@ -186,21 +188,20 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
                 <li>
                   <button 
                     className="nav-link" 
-                    onClick={handleButtonClick}
+                    onClick={() => handleLinkClick('/dashboard?view=videos')}
                   >
                     <span className="nav-icon">🎥</span>
                     <span className="nav-text">My Videos</span>
                   </button>
                 </li>
                 <li>
-                  <a 
-                    href="/dashboard" 
+                  <button 
                     className="nav-link" 
-                    onClick={handleLinkClick}
+                    onClick={() => handleLinkClick('/dashboard?view=upload')}
                   >
                     <span className="nav-icon">⬆️</span>
                     <span className="nav-text">Upload New</span>
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -223,7 +224,7 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
                   <li>
                     <button 
                       className="nav-link" 
-                      onClick={handleButtonClick}
+                      onClick={() => handleLinkClick('/settings')}
                     >
                       <span className="nav-icon">⚙️</span>
                       <span className="nav-text">Settings</span>
@@ -232,14 +233,13 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
                 </>
               ) : (
                 <li>
-                  <a 
-                    href="/login" 
+                  <button 
                     className="nav-link" 
-                    onClick={handleLinkClick}
+                    onClick={() => handleLinkClick('/login')}
                   >
                     <span className="nav-icon">🔐</span>
                     <span className="nav-text">Secure Login</span>
-                  </a>
+                  </button>
                 </li>
               )}
             </ul>
@@ -250,12 +250,17 @@ const Sidebar = ({ isOpen, onClose, isAuthenticated, onLogout }) => {
           <div className="storage-info">
             <div className="storage-label">
               <span className="storage-icon">💾</span>
-              Storage
+              Storage Used
             </div>
             <div className="storage-bar">
-              <div className="storage-progress" style={{ width: '45%' }}></div>
+              <div 
+                className="storage-progress" 
+                style={{ width: `${storageUsage.percentage}%` }}
+              ></div>
             </div>
-            <span className="storage-text">2.3 GB / 5 GB</span>
+            <span className="storage-text">
+              {(storageUsage.used / 1024).toFixed(2)} GB / {(storageUsage.total / 1024).toFixed(0)} GB
+            </span>
           </div>
           
           <div className="app-info">
