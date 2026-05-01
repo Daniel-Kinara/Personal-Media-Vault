@@ -3,11 +3,11 @@ import './About.css'
 const About = () => {
   const team = [
     { name: 'Daniel Kinara', role: 'CEO & Founder', avatar: '👨‍💼' },
-    { name: 'Edwin Sinya', role: 'CTO', avatar: '👩‍💻' },
-    { name: 'Mike Ombura', role: 'Lead Developer', avatar: '👨‍🔬' },
-    { name: 'Emma Wilson', role: 'Design Director', avatar: '👩‍🎨' },
-    { name: 'David Kim', role: 'Security Expert', avatar: '👨‍💂' },
-    { name: 'Lisa Wilkis', role: 'Customer Success', avatar: '👩‍💼' }
+    { name: 'Edwin Sifuna', role: 'CTO', avatar: '👩‍💻' },
+    { name: 'Mike Munene', role: 'Lead Developer', avatar: '👨‍🔬' },
+    { name: 'Sarah Naserian', role: 'Design Director', avatar: '👩‍🎨' },
+    { name: 'Moses Otieno', role: 'Security Expert', avatar: '👨‍💂' },
+    { name: 'Grace Wangui', role: 'Customer Success', avatar: '👩‍💼' }
   ]
 
   return (
@@ -21,8 +21,8 @@ const About = () => {
         <div className="hero-content">
           <h2>Our Mission</h2>
           <p>
-            At Media Vault, we believe your memories deserve the best protection. 
-            We're on a mission to provide secure, accessible, and intelligent media 
+            At Media Vault, we believe your memories deserve the best protection.
+            We're on a mission to provide secure, accessible, and intelligent media
             storage for everyone.
           </p>
         </div>
